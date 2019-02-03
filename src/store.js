@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import Vue from 'vue';
 import Vuex from 'vuex';
 
@@ -10,9 +11,14 @@ export default new Vuex.Store({
 
   },
   mutations: {
+    DARK_MODE: (state) => {
+      state.isDark = !state.isDark;
+    },
 
   },
   actions: {
-
+    DARK_MODE: (context) => {
+      context.commit('DARK_MODE');
+    },
   },
 });

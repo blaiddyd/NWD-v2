@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :dark="isDark">
     <Toolbar />
 
     
@@ -15,6 +15,7 @@
 import Home from './components/Home.vue';
 import Toolbar from './components/Toolbar.vue';
 import About from './components/About.vue';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
   name: 'App',
@@ -27,6 +28,11 @@ export default {
     return {
       //
     }
+  },
+  computed: {
+    ...mapState([
+      'isDark'
+    ])
   }
 }
 </script>

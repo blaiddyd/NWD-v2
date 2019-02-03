@@ -9,7 +9,7 @@
         >
             fas fa-door-open
         </v-icon>
-        
+
         <v-toolbar-title
             class="my-0"
         >
@@ -35,11 +35,28 @@
             <span>{{ icon.title}}</span>
         </v-tooltip>
 
+        <v-tooltip bottom>
+            <v-btn icon
+                @click="DARK_MODE"
+                slot="activator"
+            >
+                <v-icon v-if="isDark">
+                    fas fa-sun
+                </v-icon>
+                <v-icon v-if="!isDark"
+                    color="accent"
+                >
+                    fas fa-moon
+                </v-icon>
+            </v-btn>
+            <span v-if="isDark">Light</span>
+            <span v-if="!isDark">Dark</span>
+        </v-tooltip>
     </v-toolbar>
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
     name: 'Toolbar',
@@ -51,6 +68,16 @@ export default {
                 { pic: 'fas fa-comments', title: 'Feedback' },
             ]
         }
+    },
+    computed: {
+        ...mapState([
+            'isDark'
+        ])
+    },
+    methods: {
+        ...mapActions([
+            'DARK_MODE'
+        ])
     }
 }
 </script>
