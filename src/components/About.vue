@@ -5,7 +5,7 @@
         fill-height
     >
         <v-card
-            height="46vh"
+            height="62vh"
             width="60vw"
             class="mt-5 pa-3"
             style="border-radius: 10px;"

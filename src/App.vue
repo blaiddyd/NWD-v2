@@ -1,12 +1,8 @@
 <template>
   <v-app :dark="isDark">
     <Toolbar />
-
-    
-
     <v-content>
-      <About />
-      <Home />
+      <router-view></router-view>
     </v-content>
   </v-app>
 </template>
@@ -14,7 +10,6 @@
 <script>
 import Home from './components/Home.vue';
 import Toolbar from './components/Toolbar.vue';
-import About from './components/About.vue';
 import { mapState, mapGetters } from 'vuex';
 
 export default {
@@ -22,7 +17,6 @@ export default {
   components: {
     Home,
     Toolbar,
-    About
   },
   data () {
     return {

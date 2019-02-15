@@ -24,6 +24,7 @@
         >
             <v-btn icon
                 slot="activator"
+                :to="icon.to"
             >
                 <v-icon 
                     color="accent"
@@ -63,8 +64,9 @@ export default {
     data: () => {
         return {
             icons: [
-                { pic: 'fas fa-home', title: 'Home' },
-                { pic: 'fas fa-list-alt', title: 'See All Resources' },
+                { pic: 'fas fa-home', title: 'Home', to: '/' },
+                { pic: 'fas fa-search', title: 'Search Resources' },
+                { pic: 'fas fa-list-alt', title: 'See All Resources', to: '/all-orgs' },
                 { pic: 'fas fa-comments', title: 'Feedback' },
             ]
         }
