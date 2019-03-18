@@ -8,7 +8,7 @@
 import AllOrgs from '../components/AllOrgs.vue';
 
 export default {
-    name: 'All Resources',
+    name: 'AllResources',
     components: {
         AllOrgs
     }

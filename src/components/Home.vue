@@ -8,7 +8,9 @@
 export default {
   name: 'Home',
   data: () => {
-    hello: false;
+    return {
+      hello: false,
+    }
   }
   
 }
