@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    isDark: false,
+    isDark: true,
     orgs: [
       {
         name: '55 Central Inc',
@@ -711,17 +711,38 @@ export default new Vuex.Store({
         web: 'www.unitingcarewest.org.au/services/indigenous-communities/aboriginal-family-respite-service/',
       },
     ],
-
-  },
+  }, 
   mutations: {
     DARK_MODE: (state) => {
       state.isDark = !state.isDark;
     },
-
   },
   actions: {
     DARK_MODE: (context) => {
       context.commit('DARK_MODE');
     },
   },
+  getters: {
+    GET_SUBURBS: (state) => {
+      var suburbsList = [];
+      for(let i = 0; i < state.orgs.length; i += 1) {
+        suburbsList.push(state.orgs[i].suburb);
+      }
+      let suburbs = new Set(suburbsList);
+      var uniqueSuburbs = Array.from(suburbs);
+      //console.log(suburbsList);
+      return uniqueSuburbs;
+    },
+
+    GET_NEEDS: (state) => {
+      var needsList = [];
+      for(let i = 0; i < state.orgs.length; i += 1) {
+        needsList.push(state.orgs[i].field);
+      }
+      let needs = new Set(needsList);
+      var uniqueNeeds = Array.from(needs);
+      //console.log(suburbsList);
+      return uniqueNeeds;
+    }
+  }
 });

@@ -21,5 +21,10 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "AllResources" */ './views/All.vue'),
     },
+    {
+      path: '/search',
+      name: 'search',
+      component: () => import(/* webpackChunkName: "SearchAll" */ './views/Search.vue'),
+    }
   ],
 });

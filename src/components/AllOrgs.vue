@@ -48,8 +48,7 @@
                     :key="selected.id"
                     class="primary pt-4 mx-auto"
                     flat
-                    max-width="600"
-                    height="50vh"
+                    max-width="300"
                     style="border-radius: 15px;"
                     hover
                 >

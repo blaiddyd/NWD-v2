@@ -32,4 +32,7 @@ export default {
 </script>
 
 <style>
+  .v-card, .v-btn {
+    border-radius: 15px;
+  }
 </style>

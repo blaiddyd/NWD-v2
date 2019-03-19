@@ -65,7 +65,7 @@ export default {
         return {
             icons: [
                 { pic: 'fas fa-home', title: 'Home', to: '/' },
-                { pic: 'fas fa-search', title: 'Search Resources' },
+                { pic: 'fas fa-search', title: 'Search Resources', to: '/search' },
                 { pic: 'fas fa-list-alt', title: 'See All Resources', to: '/all-orgs' },
                 { pic: 'fas fa-comments', title: 'Feedback' },
             ]
