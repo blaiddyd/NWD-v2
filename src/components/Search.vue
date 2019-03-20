@@ -1,6 +1,6 @@
 <template>
     <v-layout align-center justify-center column>
-        <v-card class="mt-5 pa-3"
+        <v-card class="mt-5 mb-4 pa-3"
             width="50%"
         >
             <v-form>
@@ -28,20 +28,50 @@
                 <v-btn color="primary"
                     style="float: right;"
                     ripple
+                    @click="search(ageInput, suburbInput, needInput)"
                 >
                     Start the Search
                 </v-btn>
 
 
             </v-form>
-        
         </v-card>
+        <v-layout align-center justify-center column
+                v-if="!searching && show && results.length > 0"
+            >
+                <v-card v-for="(result, index) in results"
+                    :key="index" width="80%" class="ma-3 pa-3"
+                >
+                    {{ result.name }}
+                    {{ result.field }}
+                    {{ result.suburb }}
+                    {{ `${result.age[0]} - ${result.age[1]}` }}
+                    {{ result.address }}
+                    {{ result.hours }}
+                    {{ result.web }}
+                    {{ result.contact }}
+
+                </v-card>
+                
+            </v-layout>
+            <v-layout align-center justify-center column
+                v-else
+            >
+                <v-alert :value="true"
+                    icon="fas fa-sad-tear"
+                    color="error"
+                >
+                    None of the organizations matched your search criteria!
+
+                </v-alert>
+
+        </v-layout>
     </v-layout>
 </template>
 
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 
 export default {
     name: 'Search',
@@ -50,6 +80,9 @@ export default {
            ageInput: 0,
            suburbInput: '',
            needInput: '',
+           results: [],
+           searching: false,
+           show: false,
         }
     },
     computed: {
@@ -57,9 +90,20 @@ export default {
             suburbs: 'GET_SUBURBS',
             needs: 'GET_NEEDS'
         }),
+        ...mapState({
+            orgs: 'orgs'
+        })
     },
     methods: {
-        //
+        search(age, suburb, need) {
+            this.results = this.orgs.filter(element => {
+                this.searching = true;
+                return element.suburb === suburb 
+                    && element.field === need;
+            });
+            this.searching = false;
+            this.show = true;
+        }
     }
 }
 </script>
