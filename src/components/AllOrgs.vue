@@ -19,7 +19,7 @@
                 active-class="primary--text"
                 class="pa-3"
                 transition
-                expand-all
+                open-all
                 >
                 <v-icon
                     v-if="!item.children"
@@ -36,19 +36,13 @@
                 text-xs-center
             >
                 <v-scroll-y-transition mode="out-in">
-                <div
-                    v-if="!selected"
-                    class="title grey--text text--lighten-1 font-weight-light"
-                    style="align-self: center;"
-                >
-                    Select a Resource
-                </div>
                 <v-card
-                    v-else
+                    v-if="selected"
                     :key="selected.id"
                     class="primary pt-4 mx-auto"
                     flat
-                    max-width="300"
+                    max-width="700"
+                    max-height="500"
                     style="border-radius: 15px;"
                     hover
                 >
@@ -67,46 +61,54 @@
                     </div>
                     </v-card-text>
                     <v-divider></v-divider>
-                    <v-layout
-                        tag="v-card-text"
-                        text-xs-left
-                        wrap
-                    >
-                    <v-flex tag="strong" xs5 text-xs-right mr-3 mb-2
-                        class="white--text"
-                    >
-                        Address:
-                    </v-flex>
-                    <v-flex class="white--text">{{ selected.address }}</v-flex>
-                    <v-flex tag="strong" xs5 text-xs-right mr-3 mb-2
-                        class="white--text"
-                    >
-                        Hours:
-                    </v-flex>
-                    <v-flex class="white--text">{{ selected.hours }}</v-flex>
-                    <v-flex tag="strong" xs5 text-xs-right mr-3 mb-2
-                        class="white--text"
-                    >
-                        Contact:
-                    </v-flex>
-                    <v-flex class="white--text">{{ selected.contact }}</v-flex>
-                    <v-flex tag="strong" xs5 text-xs-right mr-3 mb-2
-                        class="white--text"
-                    >
-                        Website:
-                    </v-flex>
-                     <v-flex>
-                        <a :href="`${selected.web}`" target="_blank"
-                            class="white--text"
-                        >
+                    <v-layout column align-center justify-center>
+                        <h3 class="white--text">
+                            Address
+                        </h3>
+                        <p class="caption">
+                            {{ selected.address }}
+                        </p>
+                        <v-divider></v-divider>
+
+                          <h3 class="white--text">
+                            Website
+                        </h3>
+                        <a :href="selected.web" target="_blank" class="white--text">
                             {{ selected.web }}
                         </a>
-                    </v-flex>
+                        <v-divider></v-divider>
+
+                          <h3 class="white--text">
+                            Contact
+                        </h3>
+                        <p class="caption">
+                            {{ selected.contact }}
+                        </p>
+                        <v-divider></v-divider>
+
+                          <h3 class="white--text">
+                            Hours
+                        </h3>
+                        <p class="caption">
+                            {{ selected.hours }}
+                        </p>
+                        <v-divider></v-divider>
+                        
+
+
                     </v-layout>
                 </v-card>
             </v-scroll-y-transition>
         </v-flex>
+        
     </v-layout>
+     <v-pagination
+        v-model="pagination.page"
+        :length="pagination.total"
+        :total-visible="pagination.visible"    
+    ></v-pagination>
+   
+
   </v-card>
 </template>
 
@@ -127,6 +129,14 @@ export default {
             'orgs',
         ]),
 
+        pagination() {
+            return {
+                page: 1,
+                total: this.orgs.length / 10,
+                visible: 7,
+            }
+        },
+
         items() {
             return [
                 {
@@ -135,7 +145,7 @@ export default {
                 }
             ]
             
-        },
+        },    
 
         selected() {
             if (!this.active.length) {

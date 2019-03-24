@@ -1,72 +1,103 @@
 <template>
-    <v-layout align-center justify-center column>
-        <v-card class="mt-5 mb-4 pa-3"
-            width="50%"
-        >
-            <v-form>
-                <v-text-field
-                    type="number"
-                    placeholder="Enter your age"
-                    label="Age"
-                    v-model="ageInput"
-                ></v-text-field>
-
-                <v-select
-                    :items="suburbs"
-                    v-model="suburbInput"
-                    label="Suburb"
-                    placeholder="Select your suburb"
-                ></v-select>
-
-                <v-select
-                    :items="needs"
-                    v-model="needInput"
-                    label="What are you looking for?"
-                    placeholder="Select your area of need"
-                ></v-select>
-
-                <v-btn color="primary"
-                    style="float: right;"
-                    ripple
-                    @click="search(ageInput, suburbInput, needInput)"
-                >
-                    Start the Search
-                </v-btn>
-
-
-            </v-form>
-        </v-card>
-        <v-layout align-center justify-center column
-                v-if="!searching && show && results.length > 0"
+    <v-container>
+        <v-layout align-center justify-center column>
+            <v-card class="mt-5 mb-4 pa-3"
+                width="100%"
             >
+                <v-form>
+                    <v-text-field
+                        type="number"
+                        placeholder="Enter your age"
+                        label="Age"
+                        v-model="ageInput"
+                    ></v-text-field>
+
+                    <v-select
+                        :items="suburbs"
+                        v-model="suburbInput"
+                        label="Suburb"
+                        placeholder="Select your suburb"
+                    ></v-select>
+
+                    <v-select
+                        :items="needs"
+                        v-model="needInput"
+                        label="What are you looking for?"
+                        placeholder="Select your area of need"
+                    ></v-select>
+
+                    <v-btn color="primary"
+                        style="float: right;"
+                        ripple
+                        @click="search(ageInput, suburbInput, needInput)"
+                    >
+                        Start the Search
+                    </v-btn>
+
+
+                </v-form>
+            </v-card>
                 <v-card v-for="(result, index) in results"
-                    :key="index" width="80%" class="ma-3 pa-3"
+                    :key="index" width="100%" class="ma-3 pa-3"
                 >
-                    {{ result.name }}
-                    {{ result.field }}
-                    {{ result.suburb }}
-                    {{ `${result.age[0]} - ${result.age[1]}` }}
-                    {{ result.address }}
-                    {{ result.hours }}
-                    {{ result.web }}
-                    {{ result.contact }}
+                    <v-card-title primary-title
+                        style="font-size: 20pt;"
+                        class="primary--text"
+                    >
+                        {{ result.name }}
+                    </v-card-title>
+                    <v-divider></v-divider>
+                    <v-card-text>
+                        <v-layout column align-start justify-start>
+                            <div class="ma-2">
+                                <v-icon right>
+                                    fas fa-hands-helping
+                                </v-icon>
+                                {{ result.field }} 
+                            </div>
+                            <div class="ma-2">
+                                <v-icon right >
+                                    fas fa-home
+                                </v-icon>
+                                {{ result.suburb }} 
+                            </div>
+                            <div class="ma-2">
+                                <v-icon right>
+                                    fas fa-child
+                                </v-icon>
+                                {{ `${result.age[0]} - ${result.age[1]}` }} 
+                            </div>
+                            <div class="ma-2">
+                                <v-icon right>
+                                    fas fa-map-marker-alt
+                                </v-icon>
+                                {{ result.address }} 
+                            </div>
+                            <div class="ma-2">
+                                <v-icon right>
+                                    fas fa-clock
+                                </v-icon>
+                                {{ result.hours }}
+                            </div>
+
+                            <div class="ma-2">
+                                <v-icon right>
+                                    fas fa-link
+                                </v-icon>
+                                <a :href="result.web" target="_blank">{{ result.web }}</a>
+                            </div>
+                            <div class="ma-2">
+                                <v-icon right>
+                                    fas fa-phone
+                                </v-icon>
+                                {{ result.contact }}
+                            </div>
+                        </v-layout>
+                    </v-card-text>  
 
                 </v-card>
-                
-            </v-layout>
-            <v-layout align-center justify-center column
-                v-else
-            >
-                <v-alert :value="true"
-                    icon="fas fa-sad-tear"
-                    color="error"
-                >
-                    None of the organizations matched your search criteria!
-
-                </v-alert>
-
         </v-layout>
-    </v-layout>
+    </v-container>
 </template>
 
 
@@ -91,20 +122,30 @@ export default {
             needs: 'GET_NEEDS'
         }),
         ...mapState({
-            orgs: 'orgs'
-        })
+            orgs: 'orgs',
+            dark: 'isDark'
+        }),
     },
     methods: {
-        search(age, suburb, need) {
+        search(age, suburb, need) {     
             this.results = this.orgs.filter(element => {
                 this.searching = true;
                 return element.suburb === suburb 
-                    && element.field === need;
+                    && element.field === need
+                    && (age >= element.age[0] && age <= element.age[1]);
             });
             this.searching = false;
             this.show = true;
         }
-    }
+    },
 }
 </script>
+
+<style scoped>
+    .v-icon {
+        color: #00acc1;
+    }
+
+</style>
+
 

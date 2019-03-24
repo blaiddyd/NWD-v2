@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    strict: true,
     isDark: true,
     orgs: [
       {
@@ -743,6 +744,6 @@ export default new Vuex.Store({
       var uniqueNeeds = Array.from(needs);
       //console.log(suburbsList);
       return uniqueNeeds;
-    }
+    },
   }
 });
