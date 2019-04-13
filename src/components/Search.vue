@@ -37,65 +37,79 @@
 
                 </v-form>
             </v-card>
-                <v-card v-for="(result, index) in results"
-                    :key="index" width="100%" class="ma-3 pa-3"
-                >
-                    <v-card-title primary-title
-                        style="font-size: 20pt;"
-                        class="primary--text"
+                <div v-if="results.length > 0">
+                    <v-card v-for="(result, index) in results"
+                        :key="index" width="100%" class="ma-3 pa-3"
+                        
                     >
-                        {{ result.name }}
-                    </v-card-title>
-                    <v-divider></v-divider>
-                    <v-card-text>
-                        <v-layout column align-start justify-start>
-                            <div class="ma-2">
-                                <v-icon right>
-                                    fas fa-hands-helping
-                                </v-icon>
-                                {{ result.field }} 
-                            </div>
-                            <div class="ma-2">
-                                <v-icon right >
-                                    fas fa-home
-                                </v-icon>
-                                {{ result.suburb }} 
-                            </div>
-                            <div class="ma-2">
-                                <v-icon right>
-                                    fas fa-child
-                                </v-icon>
-                                {{ `${result.age[0]} - ${result.age[1]}` }} 
-                            </div>
-                            <div class="ma-2">
-                                <v-icon right>
-                                    fas fa-map-marker-alt
-                                </v-icon>
-                                {{ result.address }} 
-                            </div>
-                            <div class="ma-2">
-                                <v-icon right>
-                                    fas fa-clock
-                                </v-icon>
-                                {{ result.hours }}
-                            </div>
+                        <v-card-title primary-title
+                            style="font-size: 20pt;"
+                            class="primary--text"
+                        >
+                            {{ result.name }}
+                        </v-card-title>
+                        <v-divider></v-divider>
+                        <v-card-text>
+                            <v-layout column align-start justify-start>
+                                <div class="ma-2">
+                                    <v-icon right>
+                                        fas fa-hands-helping
+                                    </v-icon>
+                                    {{ result.field }} 
+                                </div>
+                                <div class="ma-2">
+                                    <v-icon right >
+                                        fas fa-home
+                                    </v-icon>
+                                    {{ result.suburb }} 
+                                </div>
+                                <div class="ma-2">
+                                    <v-icon right>
+                                        fas fa-child
+                                    </v-icon>
+                                    {{ `${result.age[0]} - ${result.age[1]}` }} 
+                                </div>
+                                <div class="ma-2">
+                                    <v-icon right>
+                                        fas fa-map-marker-alt
+                                    </v-icon>
+                                    {{ result.address }} 
+                                </div>
+                                <div class="ma-2">
+                                    <v-icon right>
+                                        fas fa-clock
+                                    </v-icon>
+                                    {{ result.hours }}
+                                </div>
 
-                            <div class="ma-2">
-                                <v-icon right>
-                                    fas fa-link
-                                </v-icon>
-                                <a :href="result.web" target="_blank">{{ result.web }}</a>
-                            </div>
-                            <div class="ma-2">
-                                <v-icon right>
-                                    fas fa-phone
-                                </v-icon>
-                                {{ result.contact }}
-                            </div>
-                        </v-layout>
-                    </v-card-text>  
+                                <div class="ma-2">
+                                    <v-icon right>
+                                        fas fa-link
+                                    </v-icon>
+                                    <a :href="result.web" target="_blank">{{ result.web }}</a>
+                                </div>
+                                <div class="ma-2">
+                                    <v-icon right>
+                                        fas fa-phone
+                                    </v-icon>
+                                    {{ result.contact }}
+                                </div>
+                            </v-layout>
+                        </v-card-text>  
+                    </v-card>
+                </div>
 
-                </v-card>
+                <div
+                    v-else-if="results.length === 0 && noResults"
+                >
+                    <v-alert
+                        :value="true"
+                        color="error"
+                        icon="fas fa-sad-tear"
+                    >
+                        No organizations matched your criteria! Try to start a new search?
+                    </v-alert>
+                </div>
         </v-layout>
     </v-container>
 </template>
@@ -114,6 +128,7 @@ export default {
            results: [],
            searching: false,
            show: false,
+           noResults: false,
         }
     },
     computed: {
@@ -136,6 +151,12 @@ export default {
             });
             this.searching = false;
             this.show = true;
+            if (this.results.length === 0) {
+                this.noResults = true;
+            }
+            else {
+                this.noResults = false;
+            }
         }
     },
 }
