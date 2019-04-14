@@ -40,6 +40,7 @@
                 <v-layout justify-end>
                     <v-btn color="primary"
                         ripple
+                        to="/search"
                     >
                         GET STARTED
                     </v-btn>

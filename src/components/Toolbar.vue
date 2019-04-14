@@ -1,10 +1,8 @@
 <template>
     <v-toolbar app
         color="primary"
-        class="accent--text"
     >
         <v-icon
-            color="accent"
             class="my-0"
         >
             fas fa-door-open
@@ -27,7 +25,7 @@
                 :to="icon.to"
             >
                 <v-icon 
-                    color="accent"
+                   
                     class="mx-2"
                 >
                     {{ icon.pic }}
@@ -41,11 +39,11 @@
                 @click="DARK_MODE"
                 slot="activator"
             >
-                <v-icon v-if="isDark">
+                <v-icon v-if="isDark" color="white">
                     fas fa-sun
                 </v-icon>
                 <v-icon v-if="!isDark"
-                    color="accent"
+                    color="black"
                 >
                     fas fa-moon
                 </v-icon>

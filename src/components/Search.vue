@@ -10,6 +10,7 @@
                         placeholder="Enter your age"
                         label="Age"
                         v-model="ageInput"
+                        color="success"
                     ></v-text-field>
 
                     <v-select
@@ -17,6 +18,7 @@
                         v-model="suburbInput"
                         label="Suburb"
                         placeholder="Select your suburb"
+                        color="success"
                     ></v-select>
 
                     <v-select
@@ -24,6 +26,7 @@
                         v-model="needInput"
                         label="What are you looking for?"
                         placeholder="Select your area of need"
+                        color="success"
                     ></v-select>
 
                     <v-btn color="primary"
@@ -105,7 +108,8 @@
                     <v-alert
                         :value="true"
                         color="error"
-                        icon="fas fa-sad-tear"
+                        icon="fas fa-frown"
+                        style="border-radius: 10px;"
                     >
                         No organizations matched your criteria! Try to start a new search?
                     </v-alert>

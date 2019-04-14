@@ -100,13 +100,7 @@
                 </v-card>
             </v-scroll-y-transition>
         </v-flex>
-        
     </v-layout>
-     <v-pagination
-        v-model="pagination.page"
-        :length="pagination.total"
-        :total-visible="pagination.visible"    
-    ></v-pagination>
    
 
   </v-card>

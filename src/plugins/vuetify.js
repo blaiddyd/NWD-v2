@@ -7,12 +7,12 @@ import 'vuetify/src/stylus/app.styl';
 Vue.use(Vuetify, {
   iconfont: 'fa4',
   theme: {
-    'primary': '#c51162',
-    'secondary': '#00acc1',
-    'accent': '#e0f7fa',
-    'error': '#880e4f',
-    'info': '#00838f',
-    'success': '#00897b',
+    'primary': '#7768ae',
+    'secondary': '#4d9de0',
+    'accent': '#e1bc29',
+    'error': '#e15554',
+    'info': '#4d9de0',
+    'success': '#3bb273',
     'warning': '#ffb300',
   },
 });
