@@ -73,7 +73,7 @@
                           <h3 class="white--text">
                             Website
                         </h3>
-                        <a :href="selected.web" target="_blank" class="white--text">
+                        <a :href="selected.web" target="_blank" class="white--text subtitle">
                             {{ selected.web }}
                         </a>
                         <v-divider></v-divider>

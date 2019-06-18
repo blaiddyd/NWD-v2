@@ -40,9 +40,9 @@
 
                 </v-form>
             </v-card>
-                <div v-if="results.length > 0">
+                <div v-if="results.length > 0" style="width: 100%">
                     <v-card v-for="(result, index) in results"
-                        :key="index" width="100%" class="ma-3 pa-3"
+                        :key="index" width="100%" class="my-2 pa-3"
                         
                     >
                         <v-card-title primary-title
@@ -55,44 +55,44 @@
                         <v-card-text>
                             <v-layout column align-start justify-start>
                                 <div class="ma-2">
-                                    <v-icon right>
+                                    <v-icon right class="mr-2">
                                         fas fa-hands-helping
                                     </v-icon>
                                     {{ result.field }} 
                                 </div>
                                 <div class="ma-2">
-                                    <v-icon right >
+                                    <v-icon right class="mr-2">
                                         fas fa-home
                                     </v-icon>
                                     {{ result.suburb }} 
                                 </div>
-                                <div class="ma-2">
-                                    <v-icon right>
+                                <div class="ma-2" >
+                                    <v-icon right class="mr-2">
                                         fas fa-child
                                     </v-icon>
                                     {{ `${result.age[0]} - ${result.age[1]}` }} 
                                 </div>
                                 <div class="ma-2">
-                                    <v-icon right>
+                                    <v-icon right class="mr-2">
                                         fas fa-map-marker-alt
                                     </v-icon>
                                     {{ result.address }} 
                                 </div>
                                 <div class="ma-2">
-                                    <v-icon right>
+                                    <v-icon right class="mr-2">
                                         fas fa-clock
                                     </v-icon>
                                     {{ result.hours }}
                                 </div>
 
                                 <div class="ma-2">
-                                    <v-icon right>
+                                    <v-icon right class="mr-2">
                                         fas fa-link
                                     </v-icon>
                                     <a :href="result.web" target="_blank">{{ result.web }}</a>
                                 </div>
                                 <div class="ma-2">
-                                    <v-icon right>
+                                    <v-icon right class="mr-2">
                                         fas fa-phone
                                     </v-icon>
                                     {{ result.contact }}
@@ -104,6 +104,7 @@
 
                 <div
                     v-else-if="results.length === 0 && noResults"
+                    style="width: 100%;"
                 >
                     <v-alert
                         :value="true"
